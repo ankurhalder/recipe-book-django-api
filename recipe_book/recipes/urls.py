@@ -1,10 +1,11 @@
 from django.urls import path
-from . import views
+from . import api
 
 urlpatterns = [
-    path("", views.recipe_list, name="recipe_list"),
-    path("create/", views.recipe_create, name="recipe_create"),
-    path("<int:pk>/", views.recipe_detail, name="recipe_detail"),
-    path("<int:pk>/update/", views.recipe_update, name="recipe_update"),
-    path("<int:pk>/delete/", views.recipe_delete, name="recipe_delete"),
+    path("recipes/", api.RecipeListCreateAPIView.as_view(), name="recipe-list-create"),
+    path(
+        "recipes/<int:pk>/",
+        api.RecipeRetrieveUpdateDestroyAPIView.as_view(),
+        name="recipe-detail",
+    ),
 ]
